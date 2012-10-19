@@ -1,4 +1,5 @@
-(guru-mode -1)                  # enable navigation through arrow keys
+;;; Disable the guru mode, be nice to your finger
+(add-hook 'prog-mode-hook 'turn-off-guru-mode t)
 
 (setq visible-bell t)
 
@@ -9,7 +10,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; highlight current line:
-(global-hl-line-mode nil)		
+(global-hl-line-mode nil)
 
 
 (setq mouse-yank-at-point t)
