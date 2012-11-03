@@ -39,7 +39,7 @@
   "Adds all first level `parent-dir' subdirs to the
 Emacs load path."
   (dolist (f (directory-files parent-dir))
-    (let ((name (concat parent-dir f)))
+    (let ((name (expand-file-name f parent-dir)))
       (when (and (file-directory-p name)
                  (not (equal f ".."))
                  (not (equal f ".")))
@@ -118,22 +118,6 @@ the curson at its beginning, according to the current mode."
   (forward-line 1)
   (transpose-lines 1)
   (forward-line -1))
-
-;; add the ability to copy and cut the current line, without marking it
-(defadvice kill-ring-save (before slick-copy activate compile)
-  "When called interactively with no active region, copy a single line instead."
-  (interactive
-   (if mark-active (list (region-beginning) (region-end))
-     (message "Copied line")
-     (list (line-beginning-position)
-           (line-beginning-position 2)))))
-
-(defadvice kill-region (before slick-cut activate compile)
-  "When called interactively with no active region, kill a single line instead."
-  (interactive
-   (if mark-active (list (region-beginning) (region-end))
-     (list (line-beginning-position)
-           (line-beginning-position 2)))))
 
 (defun prelude-indent-buffer ()
   "Indents the entire buffer."
