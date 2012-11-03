@@ -1,5 +1,5 @@
 ;;; Disable the guru mode, be nice to your finger
-(add-hook 'prog-mode-hook 'turn-off-guru-mode t)
+(guru-mode -1)
 
 (setq visible-bell t)
 
