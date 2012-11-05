@@ -1,6 +1,9 @@
 ;;; Disable the guru mode, be nice to your finger
 (guru-mode -1)
 
+;;; Enable the copy and past from X
+(setq x-select-enable-clipboard t)
+
 (setq visible-bell t)
 
 (setq inhibit-startup-message t)
