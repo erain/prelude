@@ -33,8 +33,29 @@
 ;;; Code:
 
 ;; customize
-(defgroup editor nil
-  "Emacs Prelude Editor enhancements"
+(defgroup prelude nil
+  "Emacs Prelude configuration."
+  :prefix "prelude-"
+  :group 'convenience)
+
+(defcustom prelude-auto-save t
+  "Non-nil values enable Prelude's auto save."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-guru t
+  "Non-nil values enable guru-mode"
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-whitespace nil
+  "Non-nil values enable Prelude's whitespace visualization."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-flyspell t
+  "Non-nil values enable Prelude's flyspell support."
+  :type 'boolean
   :group 'prelude)
 
 ;; Death to the tabs!  However, tabs historically indent to the next
@@ -120,18 +141,26 @@
 
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
+(defun prelude-auto-save-command ()
+  (when (and prelude-auto-save
+             buffer-file-name
+             (buffer-modified-p (current-buffer)))
+    (save-buffer)))
+
 (defadvice switch-to-buffer (before save-buffer-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice other-window (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice windmove-up (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice windmove-down (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice windmove-left (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice windmove-right (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
+
+(add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
 
 ;; show-paren-mode: subtle highlighting of matching parens (global-mode)
 (show-paren-mode +1)
@@ -185,8 +214,12 @@
       ispell-extra-args '("--sug-mode=ultra"))
 (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
 
-(add-hook 'message-mode-hook 'flyspell-mode)
-(add-hook 'text-mode-hook 'flyspell-mode)
+(defun prelude-enable-flyspell ()
+  (when (and prelude-flyspell (executable-find ispell-program-name))
+    (flyspell-mode +1)))
+
+(add-hook 'message-mode-hook 'prelude-enable-flyspell)
+(add-hook 'text-mode-hook 'prelude-enable-flyspell)
 
 ;; enable narrowing commands
 (put 'narrow-to-region 'disabled nil)
@@ -204,9 +237,10 @@
       bookmark-save-flag 1)
 
 ;; load yasnippet
-(require 'yasnippet)
-(add-to-list 'yas-snippet-dirs prelude-snippets-dir)
-(yas-global-mode 1)
+;(require 'yasnippet)
+;(add-to-list 'yas-snippet-dirs prelude-snippets-dir)
+;(add-to-list 'yas-snippet-dirs prelude-personal-snippets-dir)
+;(yas-global-mode 1)
 
 ;; projectile is a project management mode
 (require 'projectile)
@@ -249,7 +283,8 @@
 (require 'midnight)
 
 ;; automatically indenting yanked text if in programming-modes
-(defvar yank-indent-modes '(python-mode LaTeX-mode TeX-mode)
+(defvar yank-indent-modes
+  '(clojure-mode scala-mode python-mode LaTeX-mode TeX-mode)
   "Modes in which to indent regions that are yanked (or yank-popped). Only
 modes that don't derive from `prog-mode' should be listed here.")
 
