@@ -1,5 +1,9 @@
 ;;; Disable the guru mode, be nice to your finger
-(guru-mode -1)
+(defun disable-guru-mode ()
+  (guru-mode -1)
+  )
+
+(add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
 
 ;;; Enable the copy and past from X
 (setq x-select-enable-clipboard t)
