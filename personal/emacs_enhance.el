@@ -45,8 +45,17 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 
+;; erase-buffer
+(defun my-clear ()
+  (interactive)
+  (let ((comint-buffer-maximum-size 0))
+    (comint-truncate-buffer)))
+(defun my-shell-hook ()
+  (local-set-key "\C-cl" 'my-clear))
+(add-hook 'shell-mode-hook 'my-shell-hook)
+
 ;; save desktop:
-;; (desktop-save-mode 1)
+;; (desktop-save-mode t)
 
 ;; ibuffer:
 ;; (require 'ibuffer)
