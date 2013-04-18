@@ -55,7 +55,7 @@
 (add-hook 'shell-mode-hook 'my-shell-hook)
 
 ;; save desktop:
-;; (desktop-save-mode t)
+(desktop-save-mode t)
 
 ;; ibuffer:
 ;; (require 'ibuffer)
@@ -84,6 +84,25 @@
 
 ;; change the prefix of outline-minor-mode
 (setq outline-minor-mode-prefix [(control o)])
+
+;;;;;;
+;; key bindings section
+;;;;;;
+(global-set-key (kbd "M-1") 'delete-other-windows) ; expand current pan
+(global-set-key (kbd "M-2") 'split-window-vertically) ; split pan top/bottom
+(global-set-key (kbd "M-s") 'other-window)
+(global-set-key (kbd "M-0") 'delete-window)
+(global-set-key (kbd "M-SPC") 'set-mark-command)
+(global-set-key (kbd "C-c C-k") 'copy-line)
+
+(defun copy-line (arg)
+  "Copy lines (as many as prefix argument) in the kill ring"
+  (interactive "p")
+  (kill-ring-save (line-beginning-position)
+                  (line-beginning-position (+ 1 arg)))
+  (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
+
+
 
 (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")
