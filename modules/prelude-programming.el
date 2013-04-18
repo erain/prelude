@@ -3,7 +3,7 @@
 ;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
-;; URL: http://batsov.com/emacs-prelude
+;; URL: https://github.com/bbatsov/prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
 
@@ -117,7 +117,6 @@
   (when prelude-guru
     (guru-mode +1))
   (prelude-enable-whitespace)
-  (flycheck-mode +1)
   (prelude-local-comment-auto-fill)
   (prelude-add-watchwords))
 
@@ -125,6 +124,10 @@
 
 (add-hook 'prog-mode-hook (lambda ()
                             (run-hooks 'prelude-prog-mode-hook)))
+
+(if (fboundp 'global-flycheck-mode)
+    (global-flycheck-mode +1)
+  (add-hook 'prog-mode-hook 'flycheck-mode))
 
 (provide 'prelude-programming)
 ;;; prelude-programming.el ends here
