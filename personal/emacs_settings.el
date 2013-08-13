@@ -86,3 +86,9 @@
 (autoload 'font-lock "loading font-lock" t)
 (global-font-lock-mode t)
 (setq-default font-lock-auto-fontify t)
+
+;; Use alt as the meta key, and enable the apple copy and paste
+(setq mac-option-modifier 'meta)
+
+;; Theme used
+(load-theme 'noctilux t)

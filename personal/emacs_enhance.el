@@ -18,13 +18,13 @@
 ;; Match the parentheses
 ;; When press % on a parenthese, then go to the matching parenthese
 ;; Otherwise input an parenthese
-(global-set-key "%" 'match-paren)
-(defun match-paren (arg)
-  "Go to the matching paren if on a paren; otherwise insert %."
-  (interactive "p")
-  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-        (t (self-insert-command (or arg 1)))))
+;; (global-set-key "%" 'match-paren)
+;; (defun match-paren (arg)
+;;   "Go to the matching paren if on a paren; otherwise insert %."
+;;   (interactive "p")
+;;   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+;;         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+;;         (t (self-insert-command (or arg 1)))))
 
 ;; Author: WANG Ying
 ;; go-to-char
@@ -84,6 +84,15 @@
 
 ;; change the prefix of outline-minor-mode
 (setq outline-minor-mode-prefix [(control o)])
+
+;;;;;;
+;; Org-mode
+;;;;;;
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-font-lock-mode 1)
+
 
 ;;;;;;
 ;; key bindings section
