@@ -111,6 +111,10 @@
                   (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 
+;; expand-region the right way to select words
+(require 'expand-region)
+(global-set-key (kbd "M-z") 'er/expand-region)
+
 ;;;;;;
 ;; el-get configurations
 ;;;;;;
