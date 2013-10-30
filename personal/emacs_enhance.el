@@ -102,7 +102,9 @@
 (global-set-key (kbd "M-s") 'other-window)
 (global-set-key (kbd "M-0") 'delete-window)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
-(global-set-key (kbd "C-c C-k") 'copy-line)
+(global-set-key (kbd "C-c C-c") 'copy-line-or-region)
+(global-set-key (kbd "C-c C-x") 'cut-line-or-region)
+(global-set-key (kbd "C-c C-l") 'select-current-line)
 
 (defun copy-line (arg)
   "Copy lines (as many as prefix argument) in the kill ring"
@@ -110,6 +112,27 @@
   (kill-ring-save (line-beginning-position)
                   (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
+
+(defun copy-line-or-region ()
+  "Copy current line, or current text selection."
+  (interactive)
+  (if (region-active-p)
+      (kill-ring-save (region-beginning) (region-end))
+    (kill-ring-save (line-beginning-position) (line-beginning-position 2)) ) )
+
+(defun cut-line-or-region ()
+  "Cut the current line, or current text selection."
+  (interactive)
+  (if (region-active-p)
+      (kill-region (region-beginning) (region-end))
+    (kill-region (line-beginning-position) (line-beginning-position 2)) ) )
+
+(transient-mark-mode 1)
+(defun select-current-line ()
+  "Select the current line"
+  (interactive)
+  (end-of-line) ; move to end of line
+  (set-mark (line-beginning-position)))
 
 ;; expand-region the right way to select words
 (require 'expand-region)
