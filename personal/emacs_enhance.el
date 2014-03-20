@@ -138,6 +138,9 @@
 (require 'expand-region)
 (global-set-key (kbd "M-z") 'er/expand-region)
 
+;; magit
+(global-set-key (kbd "C-c m") 'magit-status)
+
 ;;;;;;
 ;; el-get configurations
 ;;;;;;
