@@ -70,3 +70,5 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes

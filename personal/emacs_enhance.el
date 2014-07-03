@@ -97,10 +97,6 @@
 ;;;;;;
 ;; key bindings section
 ;;;;;;
-(global-set-key (kbd "M-1") 'delete-other-windows) ; expand current pan
-(global-set-key (kbd "M-2") 'split-window-vertically) ; split pan top/bottom
-(global-set-key (kbd "M-s") 'other-window)
-(global-set-key (kbd "M-0") 'delete-window)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
 (global-set-key (kbd "C-c C-c") 'copy-line-or-region)
 (global-set-key (kbd "C-c C-x") 'cut-line-or-region)

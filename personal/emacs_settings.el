@@ -5,6 +5,9 @@
 
 (add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
 
+;;; Disable the whitespace mode provided by prelude
+(setq prelude-whitespace nil)
+
 ;;; Enable the copy and past from X
 (setq x-select-enable-clipboard t)
 
@@ -92,4 +95,4 @@
 
 ;; Theme used
 ;; (load-theme 'noctilux t)
-(load-theme 'solarized-dark t)
+;; (load-theme 'solarized-dark t)
