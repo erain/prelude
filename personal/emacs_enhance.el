@@ -137,6 +137,30 @@
 ;; magit
 (global-set-key (kbd "C-c m") 'magit-status)
 
+
+;;;;;;
+;; Projectile
+;;;;;;
+(require 'grizzl)
+(projectile-global-mode)
+(setq projectile-enable-caching t)
+(setq projectile-completion-system 'grizzl)
+;; Press Command-p for fuzzy find in project
+(global-set-key (kbd "s-s") 'projectile-find-file)
+;; Press Command-b for fuzzy switch buffer
+(global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
+;; Press Command-w for switch project
+(global-set-key (kbd "s-p") 'project-swith-project)
+
+
+;;;;;;
+;; nerdtree
+;;;;;;
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+(global-set-key [f9] 'neotree-stretch-toggle)
+
+
 ;;;;;;
 ;; el-get configurations
 ;;;;;;
