@@ -96,4 +96,5 @@
 ;; Theme used
 ;; (load-theme 'noctilux t)
 ;; (load-theme 'solarized-dark t)
-(load-theme 'monokai t)
+;; (load-theme 'monokai t)
+(load-theme 'leuven t)
