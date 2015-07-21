@@ -98,28 +98,6 @@
 ;; key bindings section
 ;;;;;;
 (global-set-key (kbd "M-SPC") 'set-mark-command)
-(global-set-key (kbd "C-c C-k") 'copy-line)
-
-(defun copy-line (arg)
-  "Copy lines (as many as prefix argument) in the kill ring.
-      Ease of use features:
-      - Move to start of next line.
-      - Appends the copy on sequential calls.
-      - Use newline as last char even on the last line of the buffer.
-      - If region is active, copy its lines."
-  (interactive "p")
-  (let ((beg (line-beginning-position))
-        (end (line-end-position arg)))
-    (when mark-active
-      (if (> (point) (mark))
-          (setq beg (save-excursion (goto-char (mark)) (line-beginning-position)))
-        (setq end (save-excursion (goto-char (mark)) (line-end-position)))))
-    (if (eq last-command 'copy-line)
-        (kill-append (buffer-substring beg end) (< end beg))
-      (kill-ring-save beg end)))
-  (kill-append "\n" nil)
-  (beginning-of-line (or (and arg (1+ arg)) 2))
-  (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
 
 ;; expand-region the right way to select words
 (require 'expand-region)
@@ -132,16 +110,19 @@
 ;;;;;;
 ;; Projectile
 ;;;;;;
-(require 'grizzl)
+;; (require 'grizzl)
+;; (projectile-global-mode)
+;; (setq projectile-enable-caching t)
+;; (setq projectile-completion-system 'grizzl)
+;; ;; Press Command-p for fuzzy find in project
+;; (global-set-key (kbd "s-s") 'projectile-find-file)
+;; ;; Press Command-b for fuzzy switch buffer
+;; (global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
+;; ;; Press Command-w for switch project
+;; (global-set-key (kbd "s-p") 'project-swith-project)
 (projectile-global-mode)
-(setq projectile-enable-caching t)
-(setq projectile-completion-system 'grizzl)
-;; Press Command-p for fuzzy find in project
-(global-set-key (kbd "s-s") 'projectile-find-file)
-;; Press Command-b for fuzzy switch buffer
-(global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
-;; Press Command-w for switch project
-(global-set-key (kbd "s-p") 'project-swith-project)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 
 
 ;;;;;;
@@ -177,6 +158,25 @@
       helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
       helm-ff-file-name-history-use-recentf t)
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+
+(global-set-key (kbd "C-x b") 'helm-mini)
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t)
+
+(when (executable-find "ack-grep")
+  (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
+        helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
+
+(setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t)
+
+(require 'helm-descbinds)
+(helm-descbinds-mode)
 
 (helm-mode 1)
 
