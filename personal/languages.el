@@ -72,3 +72,13 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+
+
+
+;;;;
+;; JSON Mode
+;;;;
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
