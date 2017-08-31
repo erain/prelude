@@ -9,7 +9,7 @@
 (setq prelude-whitespace nil)
 
 ;;; Enable the copy and past from X
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 
 (setq visible-bell t)
 
@@ -55,9 +55,8 @@
 
 (setq dired-recursive-copies 'top)
 (setq dired-recursive-deletes 'top)
-
 ;; To make system copy work with Emacs paste and Emacs copy work with system paste
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 
 ;; wheel mouse scroll enabled:
 (mouse-wheel-mode t)
@@ -94,7 +93,7 @@
 (setq mac-option-modifier 'meta)
 
 ;; Theme used
+;; (load-theme 'darcula t)
 ;; (load-theme 'noctilux t)
 ;; (load-theme 'solarized-dark t)
-;; (load-theme 'monokai t)
 (load-theme 'leuven t)

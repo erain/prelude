@@ -58,3 +58,21 @@
           (lambda ()
             (make-local-variable 'js-indent-level)
             (setq js-indent-level 2)))
+
+;;;;
+;; Google related
+;;;;
+;; -- general --
+(require 'google)
+;; -- p4 --
+(require 'p4-google)                ;; g4-annotate, improves find-file-at-point
+(require 'p4-files)                 ;; transparent support for Perforce filesystem
+(p4-enable-file-name-handler)
+;; -- google3 --
+(require 'google3)                  ;; magically set paths for compiling google3 code
+(require 'google3-build)            ;; support for blaze builds
+;; -- cs --
+(require 'csearch)                  ;; Search the whole Google code base.
+(global-set-key [f6] #'csearch)
+;; -- others --
+(require 'compilation-colorization) ;; colorizes output of (i)grep

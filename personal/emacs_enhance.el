@@ -82,6 +82,9 @@
 (autoload 'saveplace "loading saveplace" t)
 (savehist-mode t)
 
+;; perform white space cleanup on save
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
 ;; change the prefix of outline-minor-mode
 (setq outline-minor-mode-prefix [(control o)])
 
@@ -181,6 +184,23 @@
 
 (helm-mode 1)
 
+
+;;;;;;
+;; PATH related settings
+;;;;;;
+
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(when window-system (set-exec-path-from-shell-PATH))
+
+(setenv "GOPATH" "/usr/local/google/home/yiyu/work")
 
 ;;;;;;
 ;; el-get configurations
