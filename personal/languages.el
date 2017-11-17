@@ -66,7 +66,7 @@
 ;; Google related
 ;;;;
 ;; -- general --
-(require 'google)
+;; (require 'google)
 ;; -- p4 --
 ;; (require 'p4-google)                ;; g4-annotate, improves find-file-at-point
 ;; (require 'p4-files)                 ;; transparent support for Perforce filesystem
