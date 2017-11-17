@@ -39,12 +39,6 @@
   (setq unread-command-events (list last-input-event)))
 (define-key global-map (kbd "C-c a") 'wy-go-to-char)
 
-;; IDO:
-;; (require 'ido)
-(autoload 'ido "loading ido" t)
-(ido-mode t)
-(setq ido-enable-flex-matching t)
-
 ;; erase-buffer
 (defun my-clear ()
   (interactive)
@@ -135,6 +129,7 @@
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-stretch-toggle)
+(global-set-key [f10] 'neotree-refresh)
 
 
 ;;;;;;
@@ -172,6 +167,8 @@
 (setq helm-buffers-fuzzy-matching t
       helm-recentf-fuzzy-match    t)
 
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
 (when (executable-find "ack-grep")
   (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
         helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
@@ -183,6 +180,9 @@
 (helm-descbinds-mode)
 
 (helm-mode 1)
+
+;; Auto-refresh dired on file change
+(add-hook 'dired-mode-hook 'auto-revert-mode)
 
 
 ;;;;;;

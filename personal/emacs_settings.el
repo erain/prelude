@@ -93,7 +93,6 @@
 (setq mac-option-modifier 'meta)
 
 ;; Theme used
-;; (load-theme 'darcula t)
 ;; (load-theme 'noctilux t)
 ;; (load-theme 'solarized-dark t)
-(load-theme 'leuven t)
+;; (load-theme 'leuven t)
