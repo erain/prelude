@@ -117,7 +117,7 @@
 ;; (global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
 ;; ;; Press Command-w for switch project
 ;; (global-set-key (kbd "s-p") 'project-swith-project)
-(projectile-global-mode)
+(projectile-mode)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 (setq projectile-switch-project-action 'helm-projectile-find-file)
@@ -127,8 +127,8 @@
 ;; nerdtree
 ;;;;;;
 (require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
-(global-set-key [f9] 'neotree-stretch-toggle)
+;; (global-set-key [f8] 'neotree-stretch-toggle)
+(global-set-key [f9] 'neotree-toggle)
 (global-set-key [f10] 'neotree-refresh)
 
 
@@ -150,9 +150,9 @@
 (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
 (when (executable-find "curl")
-  (setq helm-google-suggest-use-curl-p t))
+  (setq helm-net-prefer-curl t))
 
-(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+(setq helm-split-window-inside-p            t ; open helm buffer inside current window, not occupy whole other window
       helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
       helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
