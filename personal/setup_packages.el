@@ -17,4 +17,4 @@ Return a list of installed packages or nil for every skipped package."
 (or (file-exists-p package-user-dir)
     (package-refresh-contents))
 
-(ensure-package-installed 'zencoding-mode 'helm-projectile 'elpy 'web-mode 'google-c-style 'neotree) ;  --> (nil nil) if iedit and magit are already installed
+(ensure-package-installed 'helm-projectile 'neotree) ;  --> (nil nil) if iedit and magit are already installed

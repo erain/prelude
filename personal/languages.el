@@ -1,19 +1,9 @@
 ;;;;
 ;; Python
 ;;;;
-(elpy-enable)
-(elpy-use-ipython)
 (custom-set-variables
  '(python-guess-indent nil)
  '(python-indent-offset 2))
-
-
-
-;;;;
-;; Haskell Indentation
-;;;;
-(custom-set-variables
- '(haskell-mode-hook '(turn-on-haskell-indentation)))
 
 
 
@@ -36,21 +26,6 @@
 ;; Latex Mode
 ;;;;
 (setq latex-run-command "xelatex")
-
-
-
-
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(require 'zencoding-mode)
-(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
 
 
