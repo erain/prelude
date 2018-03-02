@@ -1,3 +1,6 @@
+;; mouse in terminal
+;; (xterm-mouse-mode 1)
+
 ;; Author: WANG Ying
 ;; About Paste: Meta-y
 (global-set-key [(meta ?/)] 'hippie-expand)
@@ -129,7 +132,7 @@
 (require 'neotree)
 ;; (global-set-key [f8] 'neotree-stretch-toggle)
 (global-set-key [f9] 'neotree-toggle)
-(global-set-key [f10] 'neotree-refresh)
+(global-set-key [f10] 'neotree-stretch-toggle)
 
 
 ;;;;;;
@@ -184,6 +187,19 @@
 ;; Auto-refresh dired on file change
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
+
+;;;;
+;; magit
+;;;;
+;; gerit review branch
+(defun magit-push-to-gerrit ()
+  (interactive)
+  (magit-git-command "push origin HEAD:refs/for/master" (magit-toplevel)))
+;; push to gerit: P m
+(magit-define-popup-action 'magit-push-popup
+  ?m
+  "Push to gerrit"
+  'magit-push-to-gerrit)
 
 ;;;;;;
 ;; PATH related settings
