@@ -194,7 +194,7 @@
 ;; gerit review branch
 (defun magit-push-to-gerrit ()
   (interactive)
-  (magit-git-command "push origin HEAD:refs/for/master" (magit-toplevel)))
+  (magit-git-command-topdir "git push origin HEAD:refs/for/master"))
 ;; push to gerit: P m
 (magit-define-popup-action 'magit-push-popup
   ?m
