@@ -188,19 +188,6 @@
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
 
-;;;;
-;; magit
-;;;;
-;; gerit review branch
-(defun magit-push-to-gerrit ()
-  (interactive)
-  (magit-git-command-topdir "git push origin HEAD:refs/for/master"))
-;; push to gerit: P m
-(magit-define-popup-action 'magit-push-popup
-  ?m
-  "Push to gerrit"
-  'magit-push-to-gerrit)
-
 ;;;;;;
 ;; PATH related settings
 ;;;;;;
