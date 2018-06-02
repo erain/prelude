@@ -3,29 +3,34 @@
 ;;;;
 (custom-set-variables
  '(python-guess-indent nil)
- '(python-indent-offset 2))
+ '(python-indent-offset 4))
 
 
 
 ;;;;
-;; Java
+;; Bazel Mode
 ;;;;
-(require 'meghanada)
-(add-hook 'java-mode-hook
-          (lambda ()
-            ;; meghanada-mode on
-            (meghanada-mode t)
-            (flycheck-mode +1)
-            (setq c-basic-offset 2)
-            ;; use code format
-            (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
-(cond
- ((eq system-type 'windows-nt)
-  (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
-  (setq meghanada-maven-path "mvn.cmd"))
- (t
-  (setq meghanada-java-path "java")
-  (setq meghanada-maven-path "mvn")))
+(add-to-list 'auto-mode-alist '("\\.bazel\\'" . bazel-mode))
+(add-to-list 'auto-mode-alist '("\\.bzl\\'" . bazel-mode))
+(add-to-list 'auto-mode-alist '("WORKSPACE\\'" . bazel-mode))
+(add-to-list 'auto-mode-alist '("BUILD\\'" . bazel-mode))
+(add-hook 'bazel-mode-hook
+          (lambda () (add-hook 'before-save-hook #'bazel-format nil t)))
+
+
+
+;;;;;;
+;; Magit for gerrit
+;;;;;;
+(require 'magit)
+(defun magit-push-to-gerrit ()
+  (interactive)
+  (magit-git-command-topdir "git push origin HEAD:refs/for/master" ))
+
+(magit-define-popup-action 'magit-push-popup
+                           ?m
+                           "Push to gerrit"
+                           'magit-push-to-gerrit)
 
 
 
