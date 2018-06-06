@@ -65,7 +65,7 @@
   ;; your mileage may definitely vary, maybe it's better to put this in your
   ;; .emacs ...
 
-  (term-set-escape-char ?\C-x)
+  (term-set-escape-char ?\C-c)
 
   (switch-to-buffer term-ansi-buffer-name))
 

@@ -188,6 +188,12 @@
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
 
+;; Mac related setup in emacs 26.1
+;; https://news.ycombinator.com/item?id=17172524
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+
+
 ;;;;;;
 ;; PATH related settings
 ;;;;;;
