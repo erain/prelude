@@ -192,7 +192,8 @@
 ;; https://news.ycombinator.com/item?id=17172524
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
-
+;; Mac - open the file directly in the current frame
+(setq ns-pop-up-frames nil)
 
 ;;;;;;
 ;; PATH related settings
