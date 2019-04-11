@@ -210,9 +210,6 @@
 
 (when window-system (set-exec-path-from-shell-PATH))
 
-(setenv "GOPATH" "/usr/local/google/home/yiyu/work")
-
-
 ;;;;;;
 ;; el-get configurations
 ;;;;;;
