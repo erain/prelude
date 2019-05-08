@@ -202,6 +202,12 @@
 ;; Mac - open the file directly in the current frame
 (setq ns-pop-up-frames nil)
 
+;; Change windows size
+(global-set-key (kbd "C-x <left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-x <right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-x <down>") 'shrink-window)
+(global-set-key (kbd "C-x <up>") 'enlarge-window)
+
 ;;;;;;
 ;; PATH related settings
 ;;;;;;
