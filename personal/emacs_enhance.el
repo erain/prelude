@@ -217,7 +217,6 @@
 
 (when window-system (set-exec-path-from-shell-PATH))
 
-
 ;;;;;;
 ;; el-get configurations
 ;;;;;;
