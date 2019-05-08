@@ -95,4 +95,5 @@
 ;; Theme used
 ;; (load-theme 'noctilux t)
 ;; (load-theme 'solarized-dark t)
-;; (load-theme 'leuven t)
+(load-theme 'leuven t)
+(setq load-prefer-newer t)

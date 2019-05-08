@@ -91,7 +91,14 @@
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
+(setq-default prettify-symbols-alist
+              '(("#+BEGIN_SRC" . "λ")
+                ("#+END_SRC" . "λ")))
+(add-hook 'org-mode-hook 'prettify-symbols-mode)
 (global-font-lock-mode 1)
+(set-register ?o (cons 'file "~/Google Drive/org/notes.org"))
+(set-register ?g (cons 'file "~/Google Drive/org/gtd.org"))
+
 
 
 ;;;;;;
@@ -209,8 +216,6 @@
     (setq exec-path (split-string path-from-shell path-separator))))
 
 (when window-system (set-exec-path-from-shell-PATH))
-
-(setenv "GOPATH" "/usr/local/google/home/yiyu/work")
 
 
 ;;;;;;
