@@ -92,8 +92,10 @@
 ;; Use alt as the meta key, and enable the apple copy and paste
 (setq mac-option-modifier 'meta)
 
-;; Theme used
-;; (load-theme 'noctilux t)
-;; (load-theme 'solarized-dark t)
-(load-theme 'leuven t)
+;; Theme used: use leuve for gui and gruvbox-dark-hard for terminal
+(load-theme 'gruvbox-dark-hard t t)
+(if (display-graphic-p)
+    (enable-theme 'leuven)
+  (enable-theme 'gruvbox-dark-hard))
+
 (setq load-prefer-newer t)
