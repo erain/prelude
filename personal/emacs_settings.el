@@ -93,10 +93,10 @@
 (setq mac-option-modifier 'meta)
 
 ;; Theme used: use leuve for gui and gruvbox-dark-hard for terminal
+(setq load-prefer-newer t)
 (disable-theme 'zenburn)
+(setq prelude-theme nil)
 (load-theme 'gruvbox-dark-hard t t)
 (if (display-graphic-p)
-    (enable-theme 'leuven)
-  (enable-theme 'gruvbox-dark-hard))
-
-(setq load-prefer-newer t)
+    (load-theme 'leuven t)
+  (load-theme 'gruvbox-dark-hard t))
