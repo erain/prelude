@@ -96,7 +96,7 @@
 (disable-theme 'zenburn)
 (load-theme 'gruvbox-dark-hard t t)
 (if (display-graphic-p)
-    (setq prelude-theme'leuven)
-  (setq prelude-theme'gruvbox-dark-hard))
+    (enable-theme 'leuven)
+  (enable-theme 'gruvbox-dark-hard))
 
 (setq load-prefer-newer t)
