@@ -19,3 +19,13 @@ go get -u golang.org/x/tools/...
 go get -u github.com/mdempsky/gocode
 go get -u github.com/rogpeppe/godef
 ```
+
+## Key tips
+
+### Go back to a previous location
+
+Sometimes we jump to a different location in Emacs, for example, in `go-mode` we can jump to a function definition by `C-x C-j`.
+
+To jump back to a previous location, the most efficient way would be `pop-global-mark` which is bound to `C-x C-SPC`.
+
+Reference: https://superuser.com/questions/241939/how-to-jump-back-to-the-last-position-of-the-cursor-in-emacs
