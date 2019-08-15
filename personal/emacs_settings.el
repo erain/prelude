@@ -5,8 +5,9 @@
 
 (add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
 
-;;; Disable the whitespace mode provided by prelude
-(setq prelude-whitespace nil)
+;;; Set prelude whitespace width to 100
+;;; See https://github.com/bbatsov/prelude/blob/master/core/prelude-editor.el
+(setq whitespace-line-column 100) ;; limit line length
 
 ;;; Enable the copy and past from X
 (setq select-enable-clipboard t)
