@@ -29,3 +29,13 @@ Sometimes we jump to a different location in Emacs, for example, in `go-mode` we
 To jump back to a previous location, the most efficient way would be `pop-global-mark` which is bound to `C-x C-SPC`.
 
 Reference: https://superuser.com/questions/241939/how-to-jump-back-to-the-last-position-of-the-cursor-in-emacs
+
+## LSP setup
+
+### Go LSP
+
+According to the [Official Golang LSP](https://github.com/golang/go/wiki/gopls), to install the `gopls`:
+
+``` shell
+GO111MODULE=on go get golang.org/x/tools/gopls@latest
+```
