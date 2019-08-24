@@ -1,7 +1,11 @@
 (package-initialize)
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(setq package-archives
+      '(("marmalade"   . "http://marmalade-repo.org/packages/")
+        ("gnu"         . "http://elpa.gnu.org/packages/")
+        ("org"         . "http://orgmode.org/elpa/")
+        ("melpa"       . "https://melpa.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
