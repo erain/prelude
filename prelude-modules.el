@@ -12,7 +12,7 @@
 
 ;;; Programming languages support
 (require 'prelude-c)
-(require 'prelude-clojure)
+;; (require 'prelude-clojure)
 ;; (require 'prelude-coffee)
 ;; (require 'prelude-common-lisp)
 ;; (require 'prelude-css)
@@ -20,22 +20,22 @@
 ;; (require 'prelude-erlang)
 ;; (require 'prelude-elixir)
 (require 'prelude-go)
-(require 'prelude-haskell)
+;; (require 'prelude-haskell)
 (require 'prelude-js)
-(require 'prelude-latex)
+;; (require 'prelude-latex)
 (require 'prelude-lisp)
 (require 'prelude-lsp)
-(require 'prelude-ocaml)
+;; (require 'prelude-ocaml)
 (require 'prelude-org) ;; Org-mode helps you keep TODO lists, notes and more
 (require 'prelude-perl)
 (require 'prelude-python)
-(require 'prelude-ruby)
-(require 'prelude-rust)
+;; (require 'prelude-ruby)
+;; (require 'prelude-rust)
 ;; (require 'prelude-scala)
 (require 'prelude-scheme)
 (require 'prelude-shell)
 ;; (require 'prelude-scss)
 ;; (require 'prelude-ts)
-(require 'prelude-web) ;; Emacs mode for web templates
+;; (require 'prelude-web) ;; Emacs mode for web templates
 (require 'prelude-xml)
 (require 'prelude-yaml)
