@@ -80,6 +80,10 @@
   :config
   (global-set-key (kbd "C-<tab>") 'company-complete))
 
+;; With use-package:
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
 (use-package company-lsp
   :requires company
   :config

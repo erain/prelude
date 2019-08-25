@@ -3,9 +3,15 @@
 ;;;;
 (custom-set-variables
  '(python-guess-indent nil)
- '(python-indent-offset 4))
+ '(python-indent-offset 2))
 
 
+
+;;;;
+;; Golang
+;;;;
+(custom-set-variables
+ '(go-tab-width 2))
 
 ;;;;
 ;; Bazel Mode
@@ -16,22 +22,6 @@
 (add-to-list 'auto-mode-alist '("BUILD\\'" . bazel-mode))
 (add-hook 'bazel-mode-hook
           (lambda () (add-hook 'before-save-hook #'bazel-format nil t)))
-
-
-
-;;;;;;
-;; Magit for gerrit
-;;;;;;
-(require 'magit)
-(defun magit-push-to-gerrit ()
-  (interactive)
-  (magit-git-command-topdir "git push origin HEAD:refs/for/master" ))
-
-(magit-define-popup-action 'magit-push-popup
-                           ?m
-                           "Push to gerrit"
-                           'magit-push-to-gerrit)
-
 
 
 ;;;;
