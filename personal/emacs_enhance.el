@@ -116,11 +116,21 @@
 ;; Mac - open the file directly in the current frame
 (setq ns-pop-up-frames nil)
 
+
 ;; Change windows size
 (global-set-key (kbd "C-x <left>") 'shrink-window-horizontally)
 (global-set-key (kbd "C-x <right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-x <down>") 'shrink-window)
 (global-set-key (kbd "C-x <up>") 'enlarge-window)
+
+
+;;;;
+;; Some helm-mode
+;;;;
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
 
 ;;;;;;
 ;; PATH related settings
