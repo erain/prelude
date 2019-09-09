@@ -149,7 +149,7 @@
 
 
 ;;;;;;
-;; Emacs start server
+;; Emacs start server -- disabled
 ;;;;
-(load "server")
-(unless (server-running-p) (server-start))
+;; (load "server")
+;; (unless (server-running-p) (server-start))
