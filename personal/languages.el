@@ -8,12 +8,6 @@
 
 
 ;;;;
-;; Golang
-;;;;
-(custom-set-variables
- '(go-tab-width 2))
-
-;;;;
 ;; Bazel Mode
 ;;;;
 (add-to-list 'auto-mode-alist '("\\.bazel\\'" . bazel-mode))
@@ -22,6 +16,7 @@
 (add-to-list 'auto-mode-alist '("BUILD\\'" . bazel-mode))
 (add-hook 'bazel-mode-hook
           (lambda () (add-hook 'before-save-hook #'bazel-format nil t)))
+
 
 
 ;;;;

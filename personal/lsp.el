@@ -12,6 +12,22 @@
     (let ((current-prefix-arg t))
       (call-interactively #'helm-lsp-global-workspace-symbol))))
 
+(use-package yasnippet                  ; Snippets
+  :ensure t
+  :config
+  (validate-setq
+   yas-verbosity 1                      ; No need to be so verbose
+   yas-wrap-around-region t)
+
+  (with-eval-after-load 'yasnippet
+    (validate-setq yas-snippet-dirs '(yasnippet-snippets-dir)))
+
+  (yas-reload-all)
+  (yas-global-mode))
+
+(use-package yasnippet-snippets         ; Collection of snippets
+  :ensure t)
+
 (use-package lsp-mode
   :commands lsp
   :requires hydra helm helm-lsp
@@ -80,9 +96,8 @@
   :config
   (global-set-key (kbd "C-<tab>") 'company-complete))
 
-;; With use-package:
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+;; (use-package company-box
+;;   :hook (company-mode . company-box-mode))
 
 (use-package company-lsp
   :requires company
