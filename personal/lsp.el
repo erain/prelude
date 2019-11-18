@@ -1,6 +1,7 @@
 (use-package hydra)
 
 (use-package helm-lsp
+  :commands helm-lsp-workspace-symbol
   :config
   (defun netrom/helm-lsp-workspacbe-symbol-at-point ()
     (interactive)
@@ -12,21 +13,23 @@
     (let ((current-prefix-arg t))
       (call-interactively #'helm-lsp-global-workspace-symbol))))
 
+
+(use-package lsp-ivy
+  :ensure t)
+
+
 (use-package yasnippet                  ; Snippets
   :ensure t
   :config
-  (validate-setq
-   yas-verbosity 1                      ; No need to be so verbose
-   yas-wrap-around-region t)
+  (use-package yasnippet-snippets       ; Collection of snippets
+    :ensure t)
+  (yas-global-mode t))
 
-  (with-eval-after-load 'yasnippet
-    (validate-setq yas-snippet-dirs '(yasnippet-snippets-dir)))
 
-  (yas-reload-all)
-  (yas-global-mode))
+(use-package ccls
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda () (require 'ccls) (lsp))))
 
-(use-package yasnippet-snippets         ; Collection of snippets
-  :ensure t)
 
 (use-package lsp-mode
   :commands lsp
@@ -34,6 +37,7 @@
   :config
 
   (setq lsp-prefer-flymake nil)  ;; Prefer using lsp-ui (flycheck) over flymake
+  (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'go-mode-hook #'lsp)
 
@@ -77,6 +81,7 @@
             (lambda () (local-set-key (kbd "C-c C-l") 'netrom/lsp-hydra/body))))
 
 (use-package lsp-ui
+  :commands lsp-ui-mode
   :requires lsp-mode flycheck
   :config
   (setq lsp-ui-doc-enable t
@@ -94,13 +99,14 @@
 
 (use-package company
   :config
-  (global-set-key (kbd "C-<tab>") 'company-complete))
+  (global-set-key (kbd "C-/") 'company-complete))
 
 ;; (use-package company-box
 ;;   :hook (company-mode . company-box-mode))
 
 (use-package company-lsp
   :requires company
+  :commands company-lsp
   :config
   (push 'company-lsp company-backends)
 
