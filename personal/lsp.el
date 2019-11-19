@@ -1,4 +1,8 @@
-(use-package hydra)
+(use-package hydra
+  :ensure t)
+
+(use-package use-package-hydra
+  :ensure t)
 
 (use-package helm-lsp
   :commands helm-lsp-workspace-symbol
@@ -36,48 +40,79 @@
   :requires hydra helm helm-lsp
   :hook ((c++-mode . lsp)
          (go-mode . lsp))
+  :after hydra
+  :bind (:map lsp-mode-map ("C-c C-l" . hydra-lsp/body))
+  :hydra (defhydra hydra-lsp (:exit t :hint nil)
+           "
+ Buffer^^               Server^^                   Symbol
+-------------------------------------------------------------------------------------
+ [_f_] format           [_M-r_] restart            [_d_] declaration  [_i_] implementation  [_o_] documentation
+ [_m_] imenu            [_S_]   shutdown           [_D_] definition   [_t_] type            [_r_] rename
+ [_x_] execute action   [_M-s_] describe session   [_R_] references   [_s_] signature"
+           ("d" lsp-find-declaration)
+           ("D" lsp-ui-peek-find-definitions)
+           ("R" lsp-ui-peek-find-references)
+           ("i" lsp-ui-peek-find-implementation)
+           ("t" lsp-find-type-definition)
+           ("s" lsp-signature-help)
+           ("o" lsp-describe-thing-at-point)
+           ("r" lsp-rename)
+
+           ("f" lsp-format-buffer)
+           ("m" lsp-ui-imenu)
+           ("x" lsp-execute-code-action)
+
+           ("M-s" lsp-describe-session)
+           ("M-r" lsp-restart-workspace)
+           ("S" lsp-shutdown-workspace))
+
   :config
 
   (setq lsp-prefer-flymake nil)  ;; Prefer using lsp-ui (flycheck) over flymake
+  (setq lsp-enable-xref t)
 
-  (setq netrom--general-lsp-hydra-heads
-        '(;; Xref
-          ("d" xref-find-definitions "Definitions" :column "Xref")
-          ("D" xref-find-definitions-other-window "-> other win")
-          ("r" xref-find-references "References")
-          ("s" netrom/helm-lsp-workspace-symbol-at-point "Helm search")
-          ("S" netrom/helm-lsp-global-workspace-symbol-at-point "Helm global search")
+  ;; (setq netrom--general-lsp-hydra-heads
+  ;;       '(;; Xref
+  ;;         ("d" xref-find-definitions "Definitions" :column "Xref")
+  ;;         ("D" xref-find-definitions-other-window "-> other win")
+  ;;         ("r" xref-find-references "References")
+  ;;         ("s" netrom/helm-lsp-workspace-symbol-at-point "Helm search")
+  ;;         ("S" netrom/helm-lsp-global-workspace-symbol-at-point "Helm global search")
+  ;;         ("a" netrom/xref-find-apropos-at-point "Apropos")
 
-          ;; Peek
-          ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
-          ("C-r" lsp-ui-peek-find-references "References")
-          ("C-i" lsp-ui-peek-find-implementation "Implementation")
+  ;;         ;; Peek
+  ;;         ("C-d" lsp-ui-peek-find-definitions "Definitions" :column "Peek")
+  ;;         ("C-r" lsp-ui-peek-find-references "References")
+  ;;         ("C-i" lsp-ui-peek-find-implementation "Implementation")
 
-          ;; LSP
-          ("p" lsp-describe-thing-at-point "Describe at point" :column "LSP")
-          ("C-a" lsp-execute-code-action "Execute code action")
-          ("R" lsp-rename "Rename")
-          ("t" lsp-goto-type-definition "Type definition")
-          ("i" lsp-goto-implementation "Implementation")
-          ("f" helm-imenu "Filter funcs/classes (Helm)")
-          ("C-c" lsp-describe-session "Describe session")
+  ;;         ;; LSP
+  ;;         ("p" lsp-describe-thing-at-point "Describe at point" :column "LSP")
+  ;;         ("C-a" lsp-execute-code-action "Execute code action")
+  ;;         ("R" lsp-rename "Rename")
+  ;;         ("t" lsp-goto-type-definition "Type definition")
+  ;;         ("i" lsp-goto-implementation "Implementation")
+  ;;         ("f" helm-imenu "Filter funcs/classes (Helm)")
+  ;;         ("C-c" lsp-describe-session "Describe session")
 
-          ;; Flycheck
-          ("l" lsp-ui-flycheck-list "List errs/warns/notes" :column "Flycheck"))
+  ;;         ;; Flycheck
+  ;;         ("l" lsp-ui-flycheck-list "List errs/warns/notes" :column "Flycheck"))
 
-        netrom--misc-lsp-hydra-heads
-        '(;; Misc
-          ("q" nil "Cancel" :column "Misc")
-          ("b" pop-tag-mark "Back")))
+  ;;       netrom--misc-lsp-hydra-heads
+  ;;       '(;; Misc
+  ;;         ("q" nil "Cancel" :column "Misc")
+  ;;         ("b" pop-tag-mark "Back")))
 
-  ;; Create general hydra.
-  (eval `(defhydra netrom/lsp-hydra (:color blue :hint nil)
-           ,@(append
-              netrom--general-lsp-hydra-heads
-              netrom--misc-lsp-hydra-heads)))
+  ;; ;; Create general hydra.
+  ;; (eval `(defhydra netrom/lsp-hydra (:color blue :hint nil)
+  ;;          ,@(append
+  ;;             netrom--general-lsp-hydra-heads
+  ;;             netrom--misc-lsp-hydra-heads)))
 
-  (add-hook 'lsp-mode-hook
-            (lambda () (local-set-key (kbd "C-c C-l") 'netrom/lsp-hydra/body))))
+  ;; (add-hook 'lsp-mode-hook
+  ;;           (lambda () (local-set-key (kbd "C-c C-l") 'netrom/lsp-hydra/body)))
+  )
+
+
 
 (use-package lsp-ui
   :commands lsp-ui-mode
