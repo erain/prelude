@@ -31,19 +31,24 @@
 (use-package lsp-mode
   :commands lsp
   :requires helm helm-lsp
-  :hook ((c++-mode . lsp)
-         (go-mode . lsp))
+  :hook ((go-mode . lsp)
+         (c++-mode . lsp))
   :config
+  (setq lsp-prefer-flymake :none ;; Prefer using lsp-ui (flycheck) over flymake
+        lsp-enable-xref t
+        lsp-enable-snippet t
+        )
 
-  (setq lsp-prefer-flymake nil)  ;; Prefer using lsp-ui (flycheck) over flymake
-  (setq lsp-enable-xref t)
-  )
+  ;; (add-hook 'c++-mode-hook #'lsp)
+  ;; (add-hook 'go-mode-hook #'lsp)
+  ;; (add-hook 'python-mode-hook #'lsp)
+)
 
 
 
 (use-package lsp-ui
   :commands lsp-ui-mode
-  :requires lsp-mode flycheck
+  :requires lsp-mode lsp-ui-flycheck flycheck
   :config
   (setq lsp-ui-doc-enable t
         lsp-ui-doc-use-childframe t
@@ -56,6 +61,18 @@
         lsp-ui-peek-enable t
         lsp-ui-peek-list-width 60
         lsp-ui-peek-peek-height 25)
+
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)   ;; M-.
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)     ;; M-?
+  (define-key lsp-ui-mode-map (kbd "C-c C-j") 'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map (kbd "C-c C-i") 'lsp-ui-peek-find-references)
+  ;; (define-key lsp-ui-mode-map (kbd "C-c C-l r") 'lsp-rename)
+  ;; (define-key lsp-ui-mode-map (kbd "C-c C-l x") 'lsp-restart-workspace)
+  ;; (define-key lsp-ui-mode-map (kbd "C-c C-l w") 'lsp-ui-peek-find-workspace-symbol)
+  ;; (define-key lsp-ui-mode-map (kbd "C-c C-l i") 'lsp-ui-peek-find-implementation)
+  ;; (define-key lsp-ui-mode-map (kbd "C-c C-l d") 'lsp-describe-thing-at-point)
+  ;; (define-key lsp-ui-mode-map (kbd "C-c C-l e") 'lsp-execute-code-action)
+
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 

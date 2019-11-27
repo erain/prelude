@@ -3,48 +3,24 @@
 
 ;; Author: WANG Ying
 ;; About Paste: Meta-y
-(global-set-key [(meta ?/)] 'hippie-expand)
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev
-        try-expand-dabbrev-visible
-        try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill
-        try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-all-abbrevs
-        try-expand-list
-        try-expand-line
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol))
-
-;; Author: WAMG Ying
-;; Match the parentheses
-;; When press % on a parenthese, then go to the matching parenthese
-;; Otherwise input an parenthese
-;; (global-set-key "%" 'match-paren)
-;; (defun match-paren (arg)
-;;   "Go to the matching paren if on a paren; otherwise insert %."
-;;   (interactive "p")
-;;   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-;;         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-;;         (t (self-insert-command (or arg 1)))))
-
-;; Author: WANG Ying
-;; go-to-char
-;; When you press C-c a x, then you go to the next 'x'
-(defun wy-go-to-char (n char)
-  "Move forward to Nth occurence of CHAR.Typing `wy-go-to-char-key' again will move forwad to the next Nth occurence of CHAR."
-  (interactive "p\ncGo to char: ")
-  (search-forward (string char) nil nil n)
-  (while (char-equal (read-char)
-                     char)
-    (search-forward (string char) nil nil n))
-  (setq unread-command-events (list last-input-event)))
-(define-key global-map (kbd "C-c a") 'wy-go-to-char)
+;; (global-set-key [(meta ?/)] 'hippie-expand)
+;; (setq hippie-expand-try-functions-list
+;;       '(try-expand-dabbrev
+;;         try-expand-dabbrev-visible
+;;         try-expand-dabbrev-all-buffers
+;;         try-expand-dabbrev-from-kill
+;;         try-complete-file-name-partially
+;;         try-complete-file-name
+;;         try-expand-all-abbrevs
+;;         try-expand-list
+;;         try-expand-line
+;;         try-complete-lisp-symbol-partially
+;;         try-complete-lisp-symbol))
 
 
 ;; save desktop:
 (desktop-save-mode t)
+
 
 ;; backup files:
 (setq backup-by-copying t    ; don't clobber symlinks
@@ -64,6 +40,7 @@
 (autoload 'saveplace "loading saveplace" t)
 (savehist-mode t)
 
+
 ;; perform white space cleanup on save
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
@@ -79,14 +56,14 @@
                 ("#+END_SRC" . "λ")))
 (add-hook 'org-mode-hook 'prettify-symbols-mode)
 (global-font-lock-mode 1)
-(set-register ?o (cons 'file "~/Google Drive/org/notes.org"))
-(set-register ?g (cons 'file "~/Google Drive/org/gtd.org"))
+;; (set-register ?o (cons 'file "~/Google Drive/org/notes.org"))
+;; (set-register ?g (cons 'file "~/Google Drive/org/gtd.org"))
 
 
 ;;;;;;
 ;; key bindings section
 ;;;;;;
-(global-set-key (kbd "M-SPC") 'set-mark-command)
+;; (global-set-key (kbd "M-SPC") 'set-mark-command)
 
 
 ;;;;;
@@ -105,6 +82,7 @@
   (global-set-key [f9] 'neotree-toggle)
   (global-set-key [f10] 'neotree-stretch-toggle))
 
+
 ;; Auto-refresh dired on file change
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
@@ -118,10 +96,10 @@
 
 
 ;; Change windows size
-(global-set-key (kbd "C-x <left>") 'shrink-window-horizontally)
-(global-set-key (kbd "C-x <right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "C-x <down>") 'shrink-window)
-(global-set-key (kbd "C-x <up>") 'enlarge-window)
+;; (global-set-key (kbd "C-x <left>") 'shrink-window-horizontally)
+;; (global-set-key (kbd "C-x <right>") 'enlarge-window-horizontally)
+;; (global-set-key (kbd "C-x <down>") 'shrink-window)
+;; (global-set-key (kbd "C-x <up>") 'enlarge-window)
 
 
 ;;;;
@@ -146,6 +124,12 @@
     (setq exec-path (split-string path-from-shell path-separator))))
 
 (when window-system (set-exec-path-from-shell-PATH))
+
+
+;;;;;;
+;; Other keybindings
+;;;;;;
+(global-key-binding (kbd "C-\[") 'pop-global-mark)
 
 
 ;;;;;;
